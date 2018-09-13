@@ -19,6 +19,7 @@ export default {
         // avatar
       }).then((user) => {
         store.user = user
+        this.$router.push({ name: 'chatroom' })
       })
     }
   }

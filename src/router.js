@@ -12,7 +12,7 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'chatroom',
       meta: {
         requiresAuth: true
       },
