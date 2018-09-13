@@ -8,18 +8,16 @@
 <script>
 import MessagesList from './MessagesList'
 import Sendbox from './Sendbox'
+import store from '../store'
 
 export default {
-  data () {
-    return {
-      // TODO: Supprimer
-      messages: []
-    }
-  },
   methods: {
     onMessageSent (message) {
-      this.messages.push(message)
+      store.messages.push(message)
     }
+  },
+  computed: {
+    messages: () => store.messages
   },
   components: {
     MessagesList,

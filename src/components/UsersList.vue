@@ -6,17 +6,11 @@
 
 <script>
 import UsersListUser from './UsersListUser'
+import store from '../store'
 
 export default {
-  data () {
-    return {
-      users: [
-        'Booba',
-        'Kaaris',
-        'Robert',
-        'Jean-Michel'
-      ]
-    }
+  computed: {
+    users: () => store.users
   },
   components: {
     UsersListUser

@@ -1,5 +1,26 @@
 <template>
   <div>
-    Coucou je suis le login
+    <LoginForm @submit="onFormSubmit"/>
   </div>
 </template>
+
+<script>
+import LoginForm from '../components/LoginForm'
+import store from '../store'
+
+export default {
+  components: {
+    LoginForm
+  },
+  methods: {
+    onFormSubmit (username) {
+      this.$api.userRegister({
+        username
+        // avatar
+      }).then((user) => {
+        store.user = user
+      })
+    }
+  }
+}
+</script>
