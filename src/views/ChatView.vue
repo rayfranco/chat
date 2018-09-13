@@ -1,18 +1,37 @@
 <template>
-  <div>
+  <div class="container-wrapper">
     <UsersList/>
-    <Chatbox/>
+    <MessagesList :messages="messages" />
+    <Sendbox @messageSent="onMessageSent" />
   </div>
 </template>
 
 <script>
 import UsersList from '@/components/UsersList'
-import Chatbox from '@/components/Chatbox'
+import MessagesList from '@/components/MessagesList'
+import Sendbox from '@/components/Sendbox'
+import store from '../store'
 
 export default {
+  methods: {
+    onMessageSent (message) {
+      // store.messages.push(message)
+      this.$api.messageSend(message)
+    }
+  },
+  computed: {
+    messages: () => store.messages
+  },
   components: {
     UsersList,
-    Chatbox
+    MessagesList,
+    Sendbox
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.container-wrapper
+  flex 1
+  padding-left 250px
+</style>

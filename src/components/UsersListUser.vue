@@ -1,7 +1,8 @@
 <template>
-  <li>
+  <md-list-item>
+    <md-avatar class="md-avatar-icon md-primary">{{ user.username[0] }}</md-avatar>
     {{ user.username }}
-  </li>
+  </md-list-item>
 </template>
 
 <script>

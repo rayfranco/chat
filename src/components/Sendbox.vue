@@ -1,10 +1,18 @@
 <template>
-  <div>
+  <md-toolbar md-elevation="0" class="md-medium">
     <form action="#" @submit.prevent="onFormSubmit">
-      <input type="text" v-model="input">
-      <button>Send</button>
+      <md-field>
+        <label for="input">Your message</label>
+        <md-input
+          name="input"
+          id="input"
+          autocomplete="off"
+          v-model="input"
+          />
+      </md-field>
+      <md-button class="md-raised md-primary">Send</md-button>
     </form>
-  </div>
+  </md-toolbar>
 </template>
 
 <script>
@@ -22,3 +30,19 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.md-toolbar
+  position fixed
+  bottom 0
+  right 0
+  width calc(100vw - 250px)
+form
+  align-items center
+  align-content center
+  display flex
+  flex-flow row wrap
+  flex 1
+.md-field
+  flex 1
+</style>
