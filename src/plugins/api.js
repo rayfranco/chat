@@ -1,6 +1,6 @@
 import io from 'socket.io-client'
 
-const socket = io.connect('https://.......')
+const socket = io.connect('https://lolhuidehuihduieolo.com')
 
 const api = {
   get connected () {
@@ -8,14 +8,34 @@ const api = {
   },
 
   // Methods
-  userRegister (username) {
-    emitProxy()
+  userRegister (username, avatar = '') {
+    return new Promise((resolve, reject) => {
+      socket.once('user registered', (user) => {
+        resolve(user)
+      })
+      socket.once('error', (error) => {
+        reject(error)
+      })
+      emitProxy('user register', {
+        username,
+        avatar
+      })
+    })
   },
-  messageSend (message) {
-    emitProxy()
+  messageSend (message = '') {
+    emitProxy('message new', message)
   },
   commandSend (command, value = '') {
     this.messageSend(`/${command} ${value}`)
+  },
+
+  // Events
+  onMessage (cb) {
+    socket.on('message new', cb)
+  },
+
+  onUsersUpdate (cb) {
+    socket.on('users update', cb)
   }
 }
 
@@ -33,6 +53,8 @@ function emitProxy (event, ...args) {
 
 export default {
   install (Vue, options) {
-    Vue.prototype.$api = Vue.$api = api
+    console.log('plugin install')
+    Vue.prototype.$api = api
+    Vue.$api = api
   }
 }
