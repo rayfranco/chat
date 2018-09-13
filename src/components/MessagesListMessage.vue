@@ -1,6 +1,6 @@
 <template>
   <li>
-    {{ message }}
+    {{ message.user.username }}: {{ message.text }}
   </li>
 </template>
 

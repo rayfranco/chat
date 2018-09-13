@@ -14,10 +14,7 @@ export default {
   },
   methods: {
     onFormSubmit (username) {
-      this.$api.userRegister({
-        username
-        // avatar
-      }).then((user) => {
+      this.$api.userRegister(username).then((user) => {
         store.user = user
         this.$router.push({ name: 'chatroom' })
       })

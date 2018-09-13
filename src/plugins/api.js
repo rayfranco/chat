@@ -1,6 +1,7 @@
 import io from 'socket.io-client'
 
-const socket = io.connect('https://lolhuidehuihduieolo.com')
+// const socket = io.connect('http://localhost:3000')
+const socket = io.connect('https://bddi-2019-chat.herokuapp.com')
 
 const api = {
   get connected () {
@@ -36,6 +37,10 @@ const api = {
 
   onUsersUpdate (cb) {
     socket.on('users update', cb)
+  },
+
+  onError (cb) {
+    socket.on('chat error', cb)
   }
 }
 
