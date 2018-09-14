@@ -22,6 +22,13 @@ export default {
   computed: {
     messages: () => store.messages
   },
+  watch: {
+    messages () {
+      this.$nextTick(() => {
+        window.scrollTo(0, document.body.scrollHeight)
+      })
+    }
+  },
   components: {
     UsersList,
     MessagesList,

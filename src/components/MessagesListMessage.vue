@@ -3,15 +3,16 @@
     <md-card-header>
       <md-avatar
         class="md-primary"
-        :class="{ 'md-avatar-icon': !message.user.avatar }">
-        <template v-if="message.user.avatar">
-          <img :src="message.user.avatar">
+        :style="styleAvatar"
+        :class="{ 'md-avatar-icon': !user.avatar }">
+        <template v-if="user.avatar">
+          <img :src="user.avatar">
         </template>
         <template v-else>
-          {{ message.user.username[0] }}
+          {{ user.username[0] }}
         </template>
       </md-avatar>
-      <div class="md-title">{{ message.user.username }}</div>
+      <div class="md-title">{{ user.username }}</div>
     </md-card-header>
     <md-card-content>
       {{ message.text }}
@@ -20,8 +21,19 @@
 </template>
 
 <script>
+import store from '../store'
 export default {
-  props: ['message']
+  props: ['message'],
+  computed: {
+    user () {
+      return store.users.find((user) => user.username === this.message.user.username)
+    },
+    styleAvatar () {
+      return {
+        backgroundColor: this.user.color
+      }
+    }
+  }
 }
 </script>
 

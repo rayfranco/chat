@@ -18,9 +18,26 @@ const store = new Vue({
       })
       // @ts-ignore
       this.$api.onUsersUpdate(({ type, user, users }) => {
-        console.log(`${user.username} just ${type} the room`)
-        store.users = users
+        // Probably first setup
+        if (store.users.length === 0 && users.length > 0) {
+          store.users = users.map((user) => {
+            user.color = getRandomColor()
+            return user
+          })
+        } else {
+          switch (type) {
+            case 'join':
+              user.color = getRandomColor()
+              store.users.push(user)
+              break
+            case 'left':
+              let i = store.users.findIndex((u) => user.username === u.username)
+              i && store.users.splice(i, 0)
+          }
+        }
       })
+
+      const getRandomColor = () => `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`
     })
   }
 })
